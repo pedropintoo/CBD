@@ -1,0 +1,47 @@
+# Documentação do Sistema de Mensagens Redis
+
+## Visão Geral
+Este sistema permite que os utilizadores enviem e leiam mensagens, sigam outros utilizadores e bloqueiem utilizadores indesejados. As seguintes chaves e estruturas são usadas no Redis para suportar as funcionalidades do sistema.
+
+## Estruturas de Dados e Chaves
+
+### 1. Gestão de Utilizadores
+- **Chave**: `users`
+- **Tipo**: `SET`
+- **Descrição**: Contém a lista de todos os nomes de utilizadores registados.
+- **Exemplo**: `SADD users userA`
+
+### 2. Mensagens dos Utilizadores
+- **Padrão da Chave**: `messages:<username>`
+- **Tipo**: `LIST`
+- **Descrição**: Armazena todas as mensagens enviadas pelo utilizador especificado em ordem cronológica.
+- **Exemplo**: `RPUSH messages:userA "Olá, esta é a minha mensagem!"`
+
+### 3. Associação de Utilizadores
+- **Padrão da Chave**: `following:<username>`
+- **Tipo**: `SET`
+- **Descrição**: Armazena a lista de utilizadores que o utilizador especificado está a seguir.
+- **Exemplo**: `SADD following:userA userB`
+
+### 4. Utilizadores Bloqueados
+- **Padrão da Chave**: `blocked:<username>`
+- **Tipo**: `SET`
+- **Descrição**: Contém os utilizadores que foram bloqueados pelo utilizador especificado.
+- **Exemplo**: `SADD blocked:userA userC`
+
+## Resumo das Funcionalidades
+
+### 1. Adição de Utilizadores
+- Quando um novo utilizador faz login, o seu nome de utilizador é adicionado ao conjunto `users`.
+
+### 2. Armazenamento de Mensagens
+- As mensagens são adicionadas à lista `messages:<username>` usando `LPUSH`.
+
+### 3. Seguir Utilizadores
+- Quando um utilizador segue outro, o seu nome de utilizador é adicionado ao conjunto `following:<username>`.
+
+### 4. Bloquear Utilizadores
+- Quando um utilizador bloqueia outro, o seu nome de utilizador é adicionado ao conjunto `blocked:<username>`.
+
+### 5. Leitura de Mensagens
+- Um utilizador pode ler mensagens de outros utilizadores que segue, a menos que esteja bloqueado.

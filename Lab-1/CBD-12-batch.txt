@@ -1,0 +1,18 @@
+PING
+SET user "Pedro"
+GET user
+DEL user
+KEYS *
+SETEX session_id 60 "abc123"
+HSET myhash field1 "value1" field2 "value2"
+HGETALL myhash
+ZADD scores 1 "Alice" 2 "Bob"
+ZRANGE scores 0 -1 WITHSCORES
+XADD mystream * field1 "value1" field2 "value2"
+XRANGE mystream - +
+MULTI
+SET transaction_key "value"
+INCR transaction_counter
+EXEC
+SELECT 1
+SET namespace:key "value"

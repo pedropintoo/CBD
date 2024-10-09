@@ -1,0 +1,65 @@
+Search for ('Enter' for quit): pe
+
+pearl
+pearla
+pearle
+pearline
+peg
+pegeen
+peggi
+peggie
+peggy
+pen
+penelopa
+penelope
+penni
+pennie
+penny
+pepi
+pepita
+peri
+peria
+perl
+perla
+perle
+perri
+perrine
+perry
+persis
+pet
+peta
+petra
+petrina
+petronella
+petronia
+petronilla
+petronille
+petunia
+
+Search for ('Enter' for quit): petron
+
+petronella
+petronia
+petronilla
+petronille
+
+Search for ('Enter' for quit): aaa
+
+
+Search for ('Enter' for quit): zu
+
+zulema
+zuzana
+
+Search for ('Enter' for quit): zuz
+
+zuzana
+
+Search for ('Enter' for quit): zuza
+
+zuzana
+
+Search for ('Enter' for quit): zuzap
+
+
+Search for ('Enter' for quit): 

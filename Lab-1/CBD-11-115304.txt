@@ -1,0 +1,41 @@
+PING
+SET user "Pedro"
+GET user
+DEL user
+KEYS *
+EXISTS user
+SETEX session_id 60 "abc123"
+GETSET user "NewUser"
+INCR counter
+DECR counter
+LPUSH mylist "a"
+RPUSH mylist "b"
+LPOP mylist
+RPOP mylist
+LRANGE mylist 0 -1
+ZADD scores 1 "Alice" 2 "Bob"
+ZRANGE scores 0 -1 WITHSCORES
+KEYS *
+exit
+SET key "Apple"
+PEXPIRE key 1800
+TTL key
+PTTL key
+get key
+SET key "Apple"
+PEXPIRE key 18000
+get key
+RANDOMKEY
+SADD xurl Facebook.com Buddy.com Yahoo.com Youtube.com Example.com
+KEYS *e*
+SORT xurl alpha
+get xurl
+SPOP xurl
+SADD names1 "pedro" "gui"
+SADD names2 "jorge" "joao"
+SUNION names1 names2
+get USER:1001
+get user:1001
+set user:1001 "Pedro Pinto"
+get user:1001
+exit

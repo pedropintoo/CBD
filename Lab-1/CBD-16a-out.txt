@@ -1,0 +1,245 @@
+(base) > mvn exec:java -Dexec.mainClass="cbd.redis.ex6.MessageSystem" -q
+Username: pedro
+
+Welcome, pedro!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 1
+
+Enter a message: Hello, this is Pedro!
+
+Message stored!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 1
+
+Enter a message: Very encrypted message!
+
+Message stored!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 5
+
+Goodbye!
+(base) > mvn exec:java -Dexec.mainClass="cbd.redis.ex6.MessageSystem" -q
+Username: joao
+
+Welcome, joao!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 2
+
+Enter a user: pedro
+
+You are now following pedro!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 2
+
+Enter a user: pedro-teste
+
+User does not exist!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 3
+
+Enter a user: pedro
+
+Messages from pedro:
+--------------------
+Very encrypted message!
+Hello, this is Pedro!
+--------------------
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 1
+
+Enter a message: Hi everyone, joao here.
+
+Message stored!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 5
+
+Goodbye!
+(base) > mvn exec:java -Dexec.mainClass="cbd.redis.ex6.MessageSystem" -q
+Username: pedro
+
+Welcome back, pedro!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 2
+
+Enter a user: joao
+
+You are now following joao!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 3
+
+Enter a user: joao
+
+Messages from joao:
+--------------------
+Hi everyone, joao here.
+--------------------
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 4
+
+Enter a user: joao
+
+You have blocked joao!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 5
+
+Goodbye!
+(base) > mvn exec:java -Dexec.mainClass="cbd.redis.ex6.MessageSystem" -q
+Username: joao
+
+Welcome back, joao!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 3
+
+Enter a user: pedro
+
+You are blocked by pedro!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 1
+
+Enter a message: Feeling sad that pedro blocked me.
+
+Message stored!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 5
+
+Goodbye!
+(base) > mvn exec:java -Dexec.mainClass="cbd.redis.ex6.MessageSystem" -q
+Username: jorge
+
+Welcome, jorge!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 2
+
+Enter a user: pedro
+
+You are now following pedro!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 2
+
+Enter a user: joao
+
+You are now following joao!
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 3
+
+Enter a user: pedro
+
+Messages from pedro:
+--------------------
+Very encrypted message!
+Hello, this is Pedro!
+--------------------
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 3
+
+Enter a user: joao
+
+Messages from joao:
+--------------------
+Feeling sad that pedro blocked me.
+Hi everyone, joao here.
+--------------------
+
+1. Write a message
+2. Follow a user
+3. Fetch a followed user's messages
+4. Block a user
+5. Exit
+Choose an option: 5
+
+Goodbye!
