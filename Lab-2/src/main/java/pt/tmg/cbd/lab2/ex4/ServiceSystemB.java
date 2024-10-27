@@ -4,7 +4,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.IndexOptions;
 
 import org.bson.Document;
 
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class ServiceSystemB {
@@ -57,46 +55,48 @@ public class ServiceSystemB {
 
         if (retValue == null) {
             if (quantity <= this.limit) {
-                // insert with full quantity minus current request
+                // No prior requests, allow up to the limit
+                List<Date> timestamps = new ArrayList<>();
                 this.rateLimit.insertOne(
                     new Document("username", userFilter.getString("username"))
-                        .append("quantity", this.limit - quantity)
-                        .append("timestamp", currentTime)
+                        .append("timestamps", timestamps)
                 );
-                return false;
             } else {
-                return true; // The user has exceeded the rate limit in the first request
-            }
-        }
-
-        Date lastRequestTime = retValue.getDate("timestamp");
-        long elapsedTime = (currentTime.getTime() - lastRequestTime.getTime()) / MILLISECONDS_IN_SECOND;
-
-        if (elapsedTime >= timeslot) {
-            // Timeslot has expired; reset quota
-            if (quantity <= this.limit) {
-                this.rateLimit.updateOne(
-                    userFilter,
-                    new Document("$set", new Document("quantity", this.limit - quantity)
-                        .append("timestamp", currentTime)) // Reset timestamp!!!
-                );
                 return false;
-            } else {
-                return true; // Exceeds limit even after reset
-            }
+            }            
         } else {
-            int remainingQuantity = retValue.getInteger("quantity");
-            if (remainingQuantity >= quantity) {
-                // decrement quantity
-                this.rateLimit.updateOne(
-                    userFilter,
-                    new Document("$set", new Document("quantity", remainingQuantity - quantity))
-                );
-                return false;
-            } else {
-                return true; // rate limit exceeded
-            }
+            long cutoffTime = currentTime.getTime() - (timeslot * MILLISECONDS_IN_SECOND);
+
+            this.rateLimit.updateOne(
+                userFilter,
+                new Document("$pull", new Document("timestamps", new Document("$lt", new Date(cutoffTime))))
+            );
         }
+
+        System.out.println(retValue.toJson());
+        
+        // count the number of timestamps for a user
+        long timestampCount = this.rateLimit.aggregate(List.of(
+            new Document("$match", userFilter),
+            new Document("$project", new Document("_id", 0).append("timestampCount", new Document("$size", "$timestamps")))
+        )).first().getInteger("timestampCount");
+
+        if (timestampCount + quantity > this.limit) {
+            return true; // rate limit exceeded
+        }
+
+        List<Date> timestamps = new ArrayList<>();
+        // Add the current request timestamp and update the database
+        for (int i = 0; i < quantity; i++) {
+            timestamps.add(currentTime);
+        }
+
+        this.rateLimit.updateOne(
+            userFilter,
+            new Document("$push", new Document("timestamps", new Document("$each", timestamps)))
+        );
+
+        return false;
     }
 
     public void request(String username, String product, int quantity) {
@@ -108,23 +108,9 @@ public class ServiceSystemB {
         Document userRateLimitFilter = new Document("username", username);
 
         if (requestIsLimited(userRateLimitFilter, quantity)) {
-            // Fetch the user's rate limit document
-            Document userRateLimitDoc = this.rateLimit.find(userRateLimitFilter).first();
-
-            if (userRateLimitDoc == null) {
-                System.out.println("Rate limit exceeded. Please try again.");
-                return;
-            }
-
-            Date lastRequestTime = userRateLimitDoc.getDate("timestamp");
-            long elapsedTime = (Instant.now().toEpochMilli() - lastRequestTime.getTime()) / MILLISECONDS_IN_SECOND;
-            long remainingSeconds = timeslot - elapsedTime;
-
-            System.out.printf("Rate limit reached. [wait for %d seconds, currently available %d]%n", remainingSeconds, userRateLimitDoc.getInteger("quantity"));
+            System.out.println("Rate limit exceeded. Please try again later.");
         } else {
-            Document userRateLimitDoc = this.rateLimit.find(userRateLimitFilter).first();
-            int remainingQuantity = userRateLimitDoc != null ? userRateLimitDoc.getInteger("quantity") : this.limit;
-            System.out.printf("Acquired! [%d/%d]%n", remainingQuantity, this.limit);
+            System.out.println("Request successful.");
         }
     }
 
