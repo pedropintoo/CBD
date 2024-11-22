@@ -97,7 +97,8 @@ INSERT INTO tags_video (tag, video_name) VALUES ('sports', 'Basketball Highlight
 INSERT INTO tags_video (tag, video_name) VALUES ('space', 'Space Exploration');
 INSERT INTO tags_video (tag, video_name) VALUES ('music', 'Learn Guitar');
 INSERT INTO tags_video (tag, video_name) VALUES ('comedy', 'Stand-up Comedy');
-
+INSERT INTO tags_video (tag, video_name) VALUES ('Aveiro', 'Learn Guitar');
+INSERT INTO tags_video (tag, video_name) VALUES ('Aveiro', 'Space Exploration');
 
 -- Insert in table comments_author
 
@@ -151,6 +152,62 @@ INSERT INTO comments_video (video_name, author, content, comment_date) VALUES ('
 INSERT INTO comments_video (video_name, author, content, comment_date) VALUES ('dmiller', 'Travel Vlog: Japan', 'Beautiful culture.', '2022-01-24 14:50:00');
 INSERT INTO comments_video (video_name, author, content, comment_date) VALUES ('eroberts', 'Travel Vlog: Japan', 'Informative and fun!', '2022-01-25 15:25:00');
 
+-- Insert in table comments_following
+
+-- Assume 'jdoe' follows 'Funny Cats Compilation' and makes comments.
+-- 'jdoe' follows 'Funny Cats Compilation' and comments on it.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('jdoe', 'Funny Cats Compilation', 'jdoe', '2022-01-02 12:30:00', 'Hilarious video!');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('jdoe', 'Funny Cats Compilation', 'jdoe', '2022-01-03 09:15:00', 'My kids loved it too.');
+
+-- 'asmith' follows 'Yoga for Beginners' and comments on it.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('asmith', 'Yoga for Beginners', 'asmith', '2022-01-04 11:00:00', 'Great introduction to yoga.');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('asmith', 'Yoga for Beginners', 'asmith', '2022-01-05 12:20:00', 'Feeling more flexible already!');
+
+-- 'bjones' follows 'Gaming Highlights: Fortnite' and comments on it.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('bjones', 'Gaming Highlights: Fortnite', 'bjones', '2022-01-06 14:45:00', 'Epic gameplay!');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('bjones', 'Gaming Highlights: Fortnite', 'bjones', '2022-01-07 15:30:00', 'Can’t wait to try these moves.');
+
+-- Example where the follower and author are different (another user comments on a video the follower is following):
+
+-- 'jdoe' follows 'Yoga for Beginners'; 'asmith' comments on it.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('jdoe', 'Yoga for Beginners', 'asmith', '2022-01-05 12:20:00', 'Feeling more flexible already!');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('jdoe', 'Yoga for Beginners', 'jdoe', '2022-01-06 10:00:00', 'I agree, this is great for beginners.');
+
+-- 'asmith' follows 'Funny Cats Compilation'; 'jdoe' comments on it.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('asmith', 'Funny Cats Compilation', 'jdoe', '2022-01-02 12:30:00', 'Hilarious video!');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('asmith', 'Funny Cats Compilation', 'asmith', '2022-01-03 14:00:00', 'Can’t stop laughing.');
+
+-- Additional entries with random distributions:
+
+-- 'cliu' follows 'Travel Vlog: Japan'; various users comment.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('cliu', 'Travel Vlog: Japan', 'bjones', '2022-01-22 12:45:00', 'I want to visit now.');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('cliu', 'Travel Vlog: Japan', 'cliu', '2022-01-23 13:15:00', 'Great editing!');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('cliu', 'Travel Vlog: Japan', 'dmiller', '2022-01-24 14:50:00', 'Beautiful culture.');
+
+-- 'dmiller' follows 'Cooking with Chef John'; comments by 'dmiller' and 'eroberts'.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('dmiller', 'Cooking with Chef John', 'dmiller', '2022-01-10 18:00:00', 'Made this recipe last night.');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('dmiller', 'Cooking with Chef John', 'eroberts', '2022-01-07 13:10:00', 'Delicious recipes.');
+
+-- 'nmartin' follows 'Space Exploration'; comments by 'nmartin' and 'qrussell'.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('nmartin', 'Space Exploration', 'nmartin', '2022-02-19 21:50:00', 'Mind-blowing visuals.');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('nmartin', 'Space Exploration', 'qrussell', '2022-02-04 18:15:00', 'The universe is fascinating.');
+
+-- 'owhite' follows 'Meditation Guide'; comments by 'owhite' and 'mbrown'.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('owhite', 'Meditation Guide', 'owhite', '2022-02-02 13:30:00', 'Very calming and informative.');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('owhite', 'Meditation Guide', 'mbrown', '2022-02-17 19:20:00', 'Very relaxing.');
+
+-- 'pmartinez' follows 'Basketball Highlights'; comments by 'pmartinez' and 'tyoung'.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('pmartinez', 'Basketball Highlights', 'pmartinez', '2022-02-03 16:00:00', 'Awesome dunks!');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('pmartinez', 'Basketball Highlights', 'tyoung', '2022-02-06 12:45:00', 'Laughed so hard!'); -- Assuming 'tyoung' made a funny comment about the video.
+
+-- 'snguyen' follows 'Learn Guitar'; comments by 'snguyen' and 'lwalker'.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('snguyen', 'Learn Guitar', 'snguyen', '2022-02-05 10:50:00', 'Just bought a guitar, this helps!');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('snguyen', 'Learn Guitar', 'lwalker', '2022-02-15 16:50:00', 'Intense practice sessions ahead.');
+
+-- 'tyoung' follows 'Stand-up Comedy'; comments by 'tyoung' and 'gthomas'.
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('tyoung', 'Stand-up Comedy', 'tyoung', '2022-02-06 12:45:00', 'Laughed so hard!');
+INSERT INTO comments_following (follower, video_name, author, comment_date, content) VALUES ('tyoung', 'Stand-up Comedy', 'gthomas', '2022-02-05 15:15:00', 'So funny!');
+
 -- Insert in table video_followers
 
 INSERT INTO video_followers (video_name, follower) VALUES ('Funny Cats Compilation', 'jdoe');
@@ -168,6 +225,8 @@ INSERT INTO video_followers (video_name, follower) VALUES ('History Documentary:
 INSERT INTO video_followers (video_name, follower) VALUES ('Tech Reviews: Smartphones', 'lwalker');
 INSERT INTO video_followers (video_name, follower) VALUES ('Workout Routine', 'mbrown');
 INSERT INTO video_followers (video_name, follower) VALUES ('Animal Documentary: Wildlife', 'nmartin');
+INSERT INTO video_followers (video_name, follower) VALUES ('Space Exploration', 'nmartin');
+
 INSERT INTO video_followers (video_name, follower) VALUES ('Meditation Guide', 'owhite');
 INSERT INTO video_followers (video_name, follower) VALUES ('Basketball Highlights', 'pmartinez');
 INSERT INTO video_followers (video_name, follower) VALUES ('Space Exploration', 'qrussell');
@@ -235,4 +294,31 @@ INSERT INTO video_rating (rating_id, video_name, rating) VALUES (uuid(), 'Basket
 INSERT INTO video_rating (rating_id, video_name, rating) VALUES (uuid(), 'Space Exploration', 5);
 INSERT INTO video_rating (rating_id, video_name, rating) VALUES (uuid(), 'Learn Guitar', 4);
 INSERT INTO video_rating (rating_id, video_name, rating) VALUES (uuid(), 'Stand-up Comedy', 5);
+
+-- Insert in table video_views
+
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Funny Cats Compilation', '2024-11-22 10:00:00', 'Alice');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Funny Cats Compilation', '2024-11-21 12:30:00', 'Bob');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Cooking with Chef John', '2024-11-22 11:15:00', 'Carol');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Travel Vlog: Japan', '2024-11-22 13:45:00', 'David');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Top 10 Action Movies', '2024-11-22 14:30:00', 'Eve');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Funny Cats Compilation', '2024-11-20 09:00:00', 'Frank');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Yoga for Beginners', '2024-11-21 10:45:00', 'Grace');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Science Experiments', '2024-11-22 15:00:00', 'Heidi');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('DIY Home Decor', '2024-11-22 16:30:00', 'Ivan');
+INSERT INTO video_views (video_name, view_date, viewer) VALUES ('Gaming Highlights: Fortnite', '2024-11-22 18:15:00', 'Judy');
+
+-- Insert in table video_dislikes
+
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Funny Cats Compilation', '2024-11-22 10:30:00', 'Kevin');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Cooking with Chef John', '2024-11-21 11:00:00', 'Laura');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Travel Vlog: Japan', '2024-11-22 12:00:00', 'Mallory');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Top 10 Action Movies', '2024-11-22 14:00:00', 'Nina');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Funny Cats Compilation', '2024-11-21 09:45:00', 'Oliver');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Yoga for Beginners', '2024-11-22 16:00:00', 'Paul');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Science Experiments', '2024-11-22 15:30:00', 'Quincy');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('DIY Home Decor', '2024-11-22 17:00:00', 'Rachel');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Gaming Highlights: Fortnite', '2024-11-22 18:45:00', 'Sam');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Funny Cats Compilation', '2024-11-20 08:30:00', 'Tracy');
+INSERT INTO video_dislikes (video_name, dislike_date, disliker) VALUES ('Gaming Highlights: Fortnite', '2024-11-10 08:30:00', 'Tracy');
 

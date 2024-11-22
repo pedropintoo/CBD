@@ -21,8 +21,8 @@ Destroy the cassandra server
 To execute the provided CQL scripts, use the following commands:
 
 ```sh
-docker exec -it lab-3-cassandra-1 cqlsh -f /resources/CBD_L302_0000_DDL.cql
-docker exec -it lab-3-cassandra-1 cqlsh -f /resources/CBD_L302_0000_SEEDDATA.cql
+docker exec -it lab-3-cassandra-1 cqlsh -f /resources/CBD_L302_115304_DDL.cql
+docker exec -it lab-3-cassandra-1 cqlsh -f /resources/CBD_L302_115304_SEEDDATA.cql
 ```
 
 ## Java
