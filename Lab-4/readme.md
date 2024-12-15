@@ -19,10 +19,10 @@ Access to a CSV in the resources folder: `LOAD CSV WITH HEADERS FROM 'file:///re
 
 ## Docker
 
-Start the cassandra server
+Start the neo4j server
 `docker-compose up -d`
 
-Destroy the cassandra server
+Destroy the neo4j server
 `docker-compose down -v`
 
 ## Java
